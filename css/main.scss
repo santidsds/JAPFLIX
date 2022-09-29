@@ -1,0 +1,89 @@
+* {
+    color: white;
+    a {
+        
+        text-decoration: none;
+    }
+}
+
+.moviesSection {
+    .container {
+        box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+        padding: 2em;
+        padding-left: 3em;
+        padding-right: 3em;
+        transition: 0.5s ease;
+         h3 {
+            font-size: 1.5em;
+         }
+
+         p {
+            font-size: 0.8em;
+         }
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+            z-index: 2;
+            background-color: rgb(33, 37, 41);
+        }
+    }
+
+    .checked {
+        color: orange;
+    }
+
+    
+
+
+
+    
+}
+
+.movie-info-back {
+    position: absolute;
+    position: fixed;
+    display: none;
+    z-index: 1;
+   
+    
+    width: 100vw;
+    height: 100vh;
+}
+
+.addZIndex {
+    z-index: 1;
+}
+
+.movie-info {
+    display: none;
+    background: rgb(24, 24, 24);
+    border-radius: 1em;
+    width: 70vw;
+    height: 75vh;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 2;
+    padding: 5em;
+
+    
+}
+
+#backArrow {
+    cursor:pointer;
+    z-index: 3;
+}
+
+
+
+.hide {
+    display: block;
+    
+}
+
+.addBlur {
+    
+    filter: blur(20px);
+}
