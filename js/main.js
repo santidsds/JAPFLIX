@@ -200,7 +200,7 @@ function rating (stars) {
             let movieSelectedJSON = moviesArray.filter(x =>  x.id == localStorage.getItem("movieSelectedID"));
             console.log(movieSelectedJSON)
 
-            let POSTERS_API_URL = "http://www.omdbapi.com/?apikey=cb2977f&t=" + movieSelectedJSON[0].title
+            let POSTERS_API_URL = "http://www.omdbapi.com/?t="+ movieSelectedJSON[0].title +"&apikey=cb2977f" 
             
             getJSONData(POSTERS_API_URL).then(function(resultObj){
                 moviePoster = resultObj.data.Poster
