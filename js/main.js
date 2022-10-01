@@ -223,7 +223,7 @@ function rating (stars) {
             `
             
             <div class="movie-info-popup">
-              <img style="width:250px;" src="${moviePoster}" alt="">
+              <img src="${moviePoster}" alt="">
               <div class="movie-info-cont-left">
                 <h1>${movieSelectedJSON[0].title}</h1>
                 <p style="font-size:smaller" style="margin-top: 2em;">${genresArray.join(", ")}</p>

@@ -33,7 +33,18 @@
   padding: 1em;
   gap: 50px;
 }
+.movie-info-popup img {
+  width: 250px;
+}
 
+@media (min-width: 1650px) {
+  .movie-info-popup {
+    padding: 2em;
+  }
+  .movie-info-popup img {
+    width: 400px;
+  }
+}
 .movie-info-back {
   position: absolute;
   position: fixed;
