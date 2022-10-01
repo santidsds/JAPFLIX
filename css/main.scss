@@ -108,3 +108,20 @@
     
     filter: blur(20px);
 }
+
+footer {
+    margin-top: 8em;
+    margin-bottom: 2em;
+
+    a {
+        color: rgba(54, 171, 255, 0.732);
+    }
+}
+
+main {
+    padding: 5em;
+
+     h1, input, button {
+        margin-bottom: 1.5em;
+     }
+}

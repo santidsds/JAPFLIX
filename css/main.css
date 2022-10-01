@@ -83,4 +83,19 @@
 
 .addBlur {
   filter: blur(20px);
+}
+
+footer {
+  margin-top: 8em;
+  margin-bottom: 2em;
+}
+footer a {
+  color: rgba(54, 171, 255, 0.732);
+}
+
+main {
+  padding: 5em;
+}
+main h1, main input, main button {
+  margin-bottom: 1.5em;
 }/*# sourceMappingURL=main.css.map */
