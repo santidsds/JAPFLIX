@@ -38,6 +38,7 @@
 }
 .movie-info-popup img {
   width: 250px;
+  border-radius: 1em;
 }
 
 @media (min-width: 1650px) {
