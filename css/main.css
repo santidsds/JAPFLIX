@@ -11,6 +11,9 @@
   padding-left: 3em;
   padding-right: 3em;
   transition: 0.5s ease;
+  min-width: 80vw;
+  border-radius: 1em;
+  margin-bottom: 1em;
 }
 .moviesSection .container h3 {
   font-size: 1.5em;
