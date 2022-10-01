@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 movie = results[i]
                 moviePoster.push(movie.title)
 
-                console.log(Math.round(movie.vote_average/2))
+                
 
                     moviesSection.innerHTML += `
                     
@@ -118,7 +118,7 @@ function filterByValue(array, string) {
         
     })
 
-    console.log(results)
+    
 }
 
 function rating (stars) {
@@ -200,6 +200,15 @@ function rating (stars) {
             let movieSelectedJSON = moviesArray.filter(x =>  x.id == localStorage.getItem("movieSelectedID"));
             console.log(movieSelectedJSON)
 
+            let genresArray = []
+
+            movieSelectedJSON[0].genres.forEach(genre => {
+              genresArray.push(genre.name)
+              
+            });
+
+            console.log(genresArray)
+
             let POSTERS_API_URL = "https://www.omdbapi.com/?t="+ movieSelectedJSON[0].title +"&apikey=cb2977f" 
             
             getJSONData(POSTERS_API_URL).then(function(resultObj){
@@ -213,9 +222,18 @@ function rating (stars) {
             document.getElementById("movie-info").innerHTML = 
             `
             
-            <h1>${movieSelectedJSON[0].title}</h1>
-            <img src="${moviePoster}" alt="">
-            <p>${movieSelectedJSON[0].tagline}</p>
+            <div class="movie-info-popup">
+              <img style="width:250px;" src="${moviePoster}" alt="">
+              <div class="movie-info-cont-left">
+                <h1>${movieSelectedJSON[0].title}</h1>
+                <p style="font-size:smaller" style="margin-top: 2em;">${genresArray.join(", ")}</p>
+                <p style="margin-top: 2em;">${movieSelectedJSON[0].overview}</p>
+              </div>
+            </div>
+            
+            
+            
+            
             `
 
             document.getElementById("movie-info").classList.toggle("hide")
@@ -247,13 +265,15 @@ function rating (stars) {
 
   function showMovieInfo() {
     
-    let movieInfo = JSON.parse(localStorage.getItem("movieSelectedJSON"))
-    console.log(movieInfo)
-    document.getElementById("movie-info").innerHTML = 
-    `
-    <h1>${movieInfo[0].title}</h1>
-    
-    `
+    document.getElementById("movie-info").innerHTML += 
+            `
+            
+            <h1>${movieSelectedJSON[0].title}</h1>
+            
+            <p>${movieSelectedJSON[0].overview}</p>
+            <p>${movieSelectedJSON[0].genres[0].name}</p>
+            
+            `
   }
 
 function showPosters(movieTitle) {
@@ -270,6 +290,7 @@ function showPosters(movieTitle) {
     
 
 }
+
 
     
 
