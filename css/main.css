@@ -87,6 +87,29 @@
     font-size: 0.8em;
   }
 }
+@media (max-width: 1110px) {
+  .movie-info-cont-left {
+    margin-left: 0.5em;
+  }
+  .movie-info-popup {
+    padding: 0.5em;
+    margin-left: 0.5em;
+    margin-top: -0.5em;
+  }
+  .movie-info-popup h1 {
+    font-size: 2em;
+  }
+  .movie-info-popup .pGenres {
+    font-size: 0.8em;
+  }
+  .movie-info-popup img {
+    width: 150px;
+  }
+  .pOverview {
+    max-width: 550px;
+    font-size: 0.8em;
+  }
+}
 .pOverview {
   max-height: 160px;
   overflow-y: scroll;
