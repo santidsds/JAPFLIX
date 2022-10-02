@@ -59,17 +59,38 @@
 
 @media (min-width: 1650px) {
     
+    .movie-info-cont-left {
+        margin-left: 2em;
+    }
+
     .movie-info-popup {
-        padding: 2.7em;
+        padding: 2em;
+        margin-left: 2em;
+
+        h1 {
+            font-size: 3.4em;
+        }
+
+       
+
+        .pGenres {
+            font-size: 1em;
+        }
         img {
-            width: 400px;
+            width: 350px;
             
         }
+    }
+
+    .pOverview {
+        max-width: 550px;
+        
+        font-size: 1.1em;
     }
   }
 
  .pOverview {
-    max-height: 150px;
+    max-height: 160px;
     overflow-y: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
@@ -97,7 +118,7 @@
 .movie-info {
     display: none;
     background: rgb(24, 24, 24);
-    border-radius: 1em;
+    border-radius: 1.5em;
     width: 70vw;
     height: 75vh;
     position: fixed;
@@ -109,6 +130,8 @@
 
     
 }
+
+
 
 
 

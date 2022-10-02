@@ -196,7 +196,7 @@ function rating (stars) {
               <img src="${moviePoster}" alt="">
               <div class="movie-info-cont-left">
                 <h1>${selectedJSON.title}</h1>
-                <p style="font-size:smaller" style="margin-top: 2em;">${genresArray.join(", ")}</p>
+                <p class="pGenres">${genresArray.join(", ")}</p>
                 <p class="pOverview"style="margin-top: 2em;">${selectedJSON.overview}</p>
                 <div class="buttons">
                   <button class="seemoreBtn" id="seemoreBtn" onclick ="seemoreBtnInfo()">More info</button>
