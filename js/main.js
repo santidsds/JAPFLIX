@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     getJSONData(API_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
             moviesArray = resultObj.data;
-
+            console.log(moviesArray)
             movieSelectedInfo = moviesArray.filter(x=>x.id == localStorage.getItem("movieSelectedID"));
             
         }
@@ -84,7 +84,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function filterByValue(array, string) {    
     results = array.filter(obj => {
-        return obj.title.toUpperCase().includes(string.toUpperCase()) || obj.tagline.toUpperCase().includes(string.toUpperCase()) || obj.overview.toUpperCase().includes(string.toUpperCase());
+        return obj.title.toUpperCase().includes(string.toUpperCase()) || obj.tagline.toUpperCase().includes(string.toUpperCase()) || obj.overview.toUpperCase().includes(string.toUpperCase()) || obj.genres.some( (item) => {
+          return item.name.toUpperCase() == string.toUpperCase()
+        } )
     }) 
 }
 
