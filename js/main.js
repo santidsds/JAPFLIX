@@ -1,3 +1,4 @@
+
 let getJSONData = function(url){
     let result = {};
     return fetch(url)
@@ -28,7 +29,7 @@ let moviePoster = [];
 let movieSelectedInfo = [];
 let inputBuscar = document.getElementById("inputBuscar");
 let buscarBtn = document.getElementById("btnBuscar");
-let moviesSection = document.getElementById("moviesSection")
+let moviesSection = document.getElementById("moviesSection");
 
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -38,98 +39,55 @@ document.addEventListener("DOMContentLoaded", () => {
         if (resultObj.status === "ok"){
             moviesArray = resultObj.data;
 
-            movieSelectedInfo = moviesArray.filter(x=>x.id == localStorage.getItem("movieSelectedID"))
-            
-            
-           
-            
+            movieSelectedInfo = moviesArray.filter(x=>x.id == localStorage.getItem("movieSelectedID"));
             
         }
     });
 
-    
-    
-
     buscarBtn.addEventListener("click", () => {
-
         moviesSection.innerHTML = ""
-        
 
         if(inputBuscar.value){
 
-            filterByValue(moviesArray, inputBuscar.value)
-
-            
+            filterByValue(moviesArray, inputBuscar.value);
 
             for(let i=0; i<results.length; i++){
-                movie = results[i]
-                
-
-                
-
+                movie = results[i];
+              
                     moviesSection.innerHTML += `
-                    
                     <div id=${movie.id}>
                         <div id="movie-cont${i}" class="container">
                         <h3>${movie.title}</h3>
                         <div class="top-cont">
                             ${rating(Math.round(movie.vote_average/2))}
                             <p class="rating">Rating (${movie.vote_average})</p>
-                            
-        
                         </div>
                         
                         <p>${movie.tagline}</p>
                         </div>
                     </div>
-                    
                     `
-
-                
-                
             }
 
             movieInfo();
-
-            
-            
-            
-            
         }
-
-        
-        
-
-        
-        
     })
 
     document.getElementById("movie-info-back").addEventListener("click", () => {
-      document.getElementById("movie-info").classList.toggle("hide")
-      document.getElementById("filter").classList.toggle("addBlur")
-      document.getElementById("movie-info-back").classList.toggle("hide")
+      document.getElementById("movie-info").classList.toggle("hide");
+      document.getElementById("filter").classList.toggle("addBlur");
+      document.getElementById("movie-info-back").classList.toggle("hide");
   })
-
-    
-    
-
-    
-
-    
+ 
 });
 
 
-
 function filterByValue(array, string) {    
-
-    
     results = array.filter(obj => {
-        return obj.title.toUpperCase().includes(string.toUpperCase()) || obj.tagline.toUpperCase().includes(string.toUpperCase()) || obj.overview.toUpperCase().includes(string.toUpperCase())
-        
-    })
-
-    
+        return obj.title.toUpperCase().includes(string.toUpperCase()) || obj.tagline.toUpperCase().includes(string.toUpperCase()) || obj.overview.toUpperCase().includes(string.toUpperCase());
+    }) 
 }
+
 
 function rating (stars) {
     let ratingToAppend = ""
@@ -143,7 +101,7 @@ function rating (stars) {
         <span class="fa fa-star"></span>
         `
   
-        return ratingToAppend
+        return ratingToAppend;
   
     }
     else if(stars === 2) {
@@ -155,7 +113,7 @@ function rating (stars) {
         <span class="fa fa-star"></span>
         <span class="fa fa-star"></span>
         `
-        return ratingToAppend
+        return ratingToAppend;
   
     }
     else if(stars === 3) {
@@ -167,7 +125,7 @@ function rating (stars) {
         <span class="fa fa-star"></span>
         <span class="fa fa-star"></span>
         `
-        return ratingToAppend
+        return ratingToAppend;
   
     }
     else if(stars === 4) {
@@ -179,7 +137,7 @@ function rating (stars) {
         <span class="fa fa-star checked"></span>
         <span class="fa fa-star"></span>
         `
-        return ratingToAppend
+        return ratingToAppend;
   
     }
     else if(stars === 5) {
@@ -191,53 +149,45 @@ function rating (stars) {
         <span class="fa fa-star checked"></span>
         <span class="fa fa-star checked"></span>
         `
-        return ratingToAppend
+        return ratingToAppend;
   
     }
   }
+
 
   function movieInfo() {
     for(let i=0; i < 101; i++){
         
         let moviesCont =  document.getElementById("movie-cont" + i);
         
-
         moviesCont.addEventListener("mouseover", () => {
           
+            localStorage.setItem("movieSelectedID", moviesCont.parentNode.id);
+            localStorage.setItem("selectedJSON", JSON.stringify(moviesArray.filter(x =>  x.id == localStorage.getItem("movieSelectedID"))));
             
-            localStorage.setItem("movieSelectedID", moviesCont.parentNode.id)
-            
-
-            localStorage.setItem("selectedJSON", JSON.stringify(moviesArray.filter(x =>  x.id == localStorage.getItem("movieSelectedID")))) 
-            
-            let selectedJSON = JSON.parse(localStorage.getItem("selectedJSON"))[0]
-
-            
+            let selectedJSON = JSON.parse(localStorage.getItem("selectedJSON"))[0];
 
             getJSONData("https://www.omdbapi.com/?t=" + selectedJSON.title +"&apikey=cb2977f").then(function(resultObj){
-                moviePoster = resultObj.data.Poster
-                
-                    
-            })
 
+                moviePoster = resultObj.data.Poster;    
+
+            })
         })
 
         moviesCont.addEventListener("click", () => {
 
-          let selectedJSON = JSON.parse(localStorage.getItem("selectedJSON"))[0]
+            let selectedJSON = JSON.parse(localStorage.getItem("selectedJSON"))[0];
           
-            document.getElementById("movie-info-back").classList.toggle("hide")
+            document.getElementById("movie-info-back").classList.toggle("hide");
 
-            let genresArray = []
+            let genresArray = [];
 
             selectedJSON.genres.forEach(genre => {
-              genresArray.push(genre.name)
+              genresArray.push(genre.name);
               
             });
             
-
-            yearReleased = selectedJSON.release_date
-            
+            yearReleased = selectedJSON.release_date;
             
             document.getElementById("movie-info").innerHTML = 
             `
@@ -274,44 +224,23 @@ function rating (stars) {
                 
                 
               </div>
-            </div>
-            
-            
-            
-            
+            </div>           
             `
 
             document.getElementById("movie-info").classList.toggle("hide");
             document.getElementById("filter").classList.toggle("addBlur");
 
-            
-
-            
+          
             })
-
-        
-
-        
-
-        
-
-        
-
     }
-
-    
-
   }
 
   async function getAPI(url) {
-    
     // Storing response
     const response = await fetch(url);
-    
     // Storing data in form of JSON
-    let data = await response.json();
+    let data = await response.json();1
     console.log(data);
-    
 }
 
 
@@ -319,8 +248,9 @@ function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 
+
 function seemoreBtnInfo(){
-  document.getElementById("seemoreInfo").classList.toggle("hide")
+  document.getElementById("seemoreInfo").classList.toggle("hide");
 }
 
 
