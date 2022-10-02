@@ -212,7 +212,9 @@ function rating (stars) {
             
             let selectedJSON = JSON.parse(localStorage.getItem("selectedJSON"))[0]
 
-            getJSONData("https://www.omdbapi.com/?apikey=cb2977f&t="+ selectedJSON.title).then(function(resultObj){
+            
+
+            getJSONData("https://www.omdbapi.com/?t=" + selectedJSON.title +"&apikey=cb2977f").then(function(resultObj){
                 moviePoster = resultObj.data.Poster
                 
                     
