@@ -220,7 +220,6 @@ function rating (stars) {
                     
             })
 
-            
         })
 
         moviesCont.addEventListener("click", () => {
