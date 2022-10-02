@@ -51,18 +51,32 @@
     img {
         width:250px;
         border-radius: 1em;
+        max-height: 500px;
 
         
     }
 }
 
 @media (min-width: 1650px) {
+    
     .movie-info-popup {
         padding: 2em;
         img {
             width: 400px;
+            
         }
     }
+  }
+
+ .pOverview {
+    max-height: 150px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+ }
+
+ .pOverview::-webkit-scrollbar {
+    display: none;
   }
 
 .movie-info-back {
@@ -94,6 +108,54 @@
     padding: 5em;
 
     
+}
+
+
+
+
+.seemoreBtn, .watchBtn {
+    
+    border: none;
+    border-radius: 0.6em;
+    padding: 0.5em;
+    width: 100px;
+    margin-top: 2em;
+    margin-right: 1em;
+    
+}
+
+.watchBtn {
+    background:rgb(220, 26, 40);
+}
+
+.seemoreBtn {
+    color: black;
+}
+
+.seemoreInfo {
+    width: 250px;
+    height: 200px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 1em;
+    border: none;
+    margin-top: 0.5em;
+    position: absolute;
+    padding: 1.5em;
+    display: none;
+    
+    p {
+        color: black;
+    }
+
+    .pYear, .pBudget, .pRevenue, .pDuration {
+        display: flex;
+        gap: 20px;
+    }
+
+    span {
+        font-weight: bold;
+        color: black;
+    }
 }
 
 #backArrow {

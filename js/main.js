@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         moviesSection.innerHTML = ""
         
 
-        if(inputBuscar){
+        if(inputBuscar.value){
 
             filterByValue(moviesArray, inputBuscar.value)
 
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             for(let i=0; i<results.length; i++){
                 movie = results[i]
-                moviePoster.push(movie.title)
+                
 
                 
 
@@ -91,6 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             movieInfo();
+
+            
             
             
             
@@ -102,6 +104,15 @@ document.addEventListener("DOMContentLoaded", () => {
         
         
     })
+
+    document.getElementById("movie-info-back").addEventListener("click", () => {
+      document.getElementById("movie-info").classList.toggle("hide")
+      document.getElementById("filter").classList.toggle("addBlur")
+      document.getElementById("movie-info-back").classList.toggle("hide")
+  })
+
+    
+    
 
     
 
@@ -190,44 +201,78 @@ function rating (stars) {
     for(let i=0; i < 101; i++){
         
         let moviesCont =  document.getElementById("movie-cont" + i);
+        
 
-        moviesCont.addEventListener("click", () => {
-            document.getElementById("movie-info-back").classList.toggle("hide")
+        moviesCont.addEventListener("mouseover", () => {
+          
             
             localStorage.setItem("movieSelectedID", moviesCont.parentNode.id)
-            console.log(localStorage.getItem("movieSelectedID"))
+            
 
-            let movieSelectedJSON = moviesArray.filter(x =>  x.id == localStorage.getItem("movieSelectedID"));
-            console.log(movieSelectedJSON)
+            localStorage.setItem("selectedJSON", JSON.stringify(moviesArray.filter(x =>  x.id == localStorage.getItem("movieSelectedID")))) 
+            
+            let selectedJSON = JSON.parse(localStorage.getItem("selectedJSON"))[0]
+
+            getJSONData("http://www.omdbapi.com/?apikey=cb2977f&t="+ selectedJSON.title).then(function(resultObj){
+                moviePoster = resultObj.data.Poster
+                
+                    
+            })
+
+            
+        })
+
+        moviesCont.addEventListener("click", () => {
+
+          let selectedJSON = JSON.parse(localStorage.getItem("selectedJSON"))[0]
+          
+            document.getElementById("movie-info-back").classList.toggle("hide")
 
             let genresArray = []
 
-            movieSelectedJSON[0].genres.forEach(genre => {
+            selectedJSON.genres.forEach(genre => {
               genresArray.push(genre.name)
               
             });
-
-            console.log(genresArray)
-
-            let POSTERS_API_URL = "https://www.omdbapi.com/?t="+ movieSelectedJSON[0].title +"&apikey=cb2977f" 
-            
-            getJSONData(POSTERS_API_URL).then(function(resultObj){
-                moviePoster = resultObj.data.Poster
-                console.log(moviePoster)
-                    
-            });
-
             
 
+            yearReleased = selectedJSON.release_date
+            
+            
             document.getElementById("movie-info").innerHTML = 
             `
             
             <div class="movie-info-popup">
               <img src="${moviePoster}" alt="">
               <div class="movie-info-cont-left">
-                <h1>${movieSelectedJSON[0].title}</h1>
+                <h1>${selectedJSON.title}</h1>
                 <p style="font-size:smaller" style="margin-top: 2em;">${genresArray.join(", ")}</p>
-                <p style="margin-top: 2em;">${movieSelectedJSON[0].overview}</p>
+                <p class="pOverview"style="margin-top: 2em;">${selectedJSON.overview}</p>
+                <div class="buttons">
+                  <button class="seemoreBtn" id="seemoreBtn" onclick ="seemoreBtnInfo()">More info</button>
+                  <button class="watchBtn" id="watchBtn">Watch</button>
+                </div>
+                  <div class="seemoreInfo" id="seemoreInfo">
+                    <div class="pYear">
+                      <p><span>Year:</span></p>
+                      <p>${selectedJSON.release_date.slice(0,4)}</p>
+                    </div>
+                    <div class="pDuration">
+                      <p><span>Duration:</span></p>
+                      <p>${selectedJSON.runtime} min</p>
+                    </div>
+                    <div class="pBudget">
+                      <p><span>Budget:</span></p>
+                      <p>$ ${numberWithCommas(selectedJSON.budget)}</p>
+                    </div>
+                    <div class="pRevenue">
+                      <p><span>Revenue:</span></p>
+                      <p>$ ${numberWithCommas(selectedJSON.revenue)}</p>
+                    </div>
+                    
+                  </div>
+                
+                
               </div>
             </div>
             
@@ -236,19 +281,25 @@ function rating (stars) {
             
             `
 
-            document.getElementById("movie-info").classList.toggle("hide")
-            document.getElementById("filter").classList.toggle("addBlur")
-            })
-
-        document.getElementById("movie-info-back").addEventListener("click", () => {
-            document.getElementById("movie-info").classList.toggle("hide")
-            document.getElementById("filter").classList.toggle("addBlur")
-            document.getElementById("movie-info-back").classList.toggle("hide")
-        })
+            document.getElementById("movie-info").classList.toggle("hide");
+            document.getElementById("filter").classList.toggle("addBlur");
 
             
 
+            
+            })
+
+        
+
+        
+
+        
+
+        
+
     }
+
+    
 
   }
 
@@ -290,6 +341,15 @@ function showPosters(movieTitle) {
     
 
 }
+
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+}
+
+function seemoreBtnInfo(){
+  document.getElementById("seemoreInfo").classList.toggle("hide")
+}
+
 
 
     
