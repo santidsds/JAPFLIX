@@ -26,7 +26,6 @@ let API_URL = 'https://japceibal.github.io/japflix_api/movies-data.json';
 let moviesArray = [];
 let moviePoster = [];
 let movieSelectedInfo = [];
-let posters = []
 let inputBuscar = document.getElementById("inputBuscar");
 let buscarBtn = document.getElementById("btnBuscar");
 let moviesSection = document.getElementById("moviesSection")
@@ -213,7 +212,7 @@ function rating (stars) {
             
             let selectedJSON = JSON.parse(localStorage.getItem("selectedJSON"))[0]
 
-            getJSONData("http://www.omdbapi.com/?apikey=cb2977f&t="+ selectedJSON.title).then(function(resultObj){
+            getJSONData("https://www.omdbapi.com/?apikey=cb2977f&t="+ selectedJSON.title).then(function(resultObj){
                 moviePoster = resultObj.data.Poster
                 
                     
@@ -314,33 +313,6 @@ function rating (stars) {
     
 }
 
-  function showMovieInfo() {
-    
-    document.getElementById("movie-info").innerHTML += 
-            `
-            
-            <h1>${movieSelectedJSON[0].title}</h1>
-            
-            <p>${movieSelectedJSON[0].overview}</p>
-            <p>${movieSelectedJSON[0].genres[0].name}</p>
-            
-            `
-  }
-
-function showPosters(movieTitle) {
-    
-    
-    
-    let POSTERS_API_URL = " http://www.omdbapi.com/?t=" + movieTitle + "&apikey=cb2977f"
-
-        getJSONData(POSTERS_API_URL).then(function(resultObj){
-            moviePoster = resultObj.data.Poster
-            console.log(moviePoster)
-                    
-            });
-    
-
-}
 
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
